@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+  database:
+    image: postgres:10
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_DB=sonarqube
+    volumes:
+      - /opt/postgresql:/var/lib/postgresql:z
+      - /opt/postgresql/data:/var/lib/postgresql/data:z
+  sonarqube:
+    image: sonarqube:hive
+    networks:
+      - sonarnet
+    depends_on:
+      - database
+    ports:
+      - '9000:9000'
+    environment:
+      - sonar.jdbc.url=jdbc:postgresql://database:5432/sonarqube
+    volumes:
+      - /opt/sonarqube/conf:/opt/sonarqube/conf:z
+      - /opt/sonarqube/extensions/plugins:/opt/sonarqube/extensions/plugins:z
+      - /opt/sonarqube/extensions/downloads:/opt/sonarqube/extensions/downloads:z
+      - /opt/sonarqube/data:/opt/sonarqube/data:z
+
+networks:
+  sonarnet:
+    driver: bridge

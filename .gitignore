@@ -1,0 +1,13 @@
+
+#Project
+.vscode/
+.vs/
+.idea/
+
+# Certificates related files
+files/certs/*.crt
+files/certs/*.key
+files/certs/*.jks
+
+# Jar files
+*.jar
