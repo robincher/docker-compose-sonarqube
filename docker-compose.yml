@@ -20,8 +20,8 @@ services:
     networks:
       - sonarnet
     environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
+      - POSTGRES_USER=xxxx
+      - POSTGRES_PASSWORD=xxxx
       - POSTGRES_DB=sonarqube
     volumes:
       - /opt/postgresql:/var/lib/postgresql:z

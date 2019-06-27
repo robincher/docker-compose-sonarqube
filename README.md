@@ -69,6 +69,19 @@ docker-compose up -d
 
 SonarQube should be up and running. Try to access it by going to http://localhost:9000
 
+## Editing the docker-compose file
+
+### Specifying your postgresql parameters
+
+Edit the env variables based on your own set-up. Note : This is not a secure or recommended way of managing secrets in containers, please do check out solutions like Hashicorp's Vault if you intend to run this in enterprise level.
+
+```
+   environment:
+      - POSTGRES_USER=xxxx
+      - POSTGRES_PASSWORD=xxxx
+      - POSTGRES_DB=xxx
+```
+
 ## Editing SonarQube Configuration
 
 You can also edit the configuration at conf/sonar.properties as it is mount directly to the container. The property file has been sanitized without actual secrets , ips or passwords.
