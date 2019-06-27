@@ -1,8 +1,22 @@
-version: '2'
+version: '3'
 
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - 443:443
+    volumes:
+      - /opt/nginx/yourhost.xyz.key:/etc/nginx/yourhost.xyz.key:ro
+      - /opt/nginx/yourhost.xyz.crt:/etc/nginx/yourhost.xyz.crt:ro
+      - /opt/nginx/sonarqube.conf:/etc/nginx/conf.d/sonarqube.conf:z
+    networks:
+      - sonarnet
+    restart: always
+
   database:
     image: postgres:10
+    container_name: postgresql
     networks:
       - sonarnet
     environment:
@@ -12,14 +26,17 @@ services:
     volumes:
       - /opt/postgresql:/var/lib/postgresql:z
       - /opt/postgresql/data:/var/lib/postgresql/data:z
+
   sonarqube:
-    image: sonarqube:hive
+    image: sonarqube:latest
+    container_name: sonarqube
+    hostname: sonarqube
     networks:
       - sonarnet
     depends_on:
       - database
     ports:
-      - '9000:9000'
+      - 9000:9000
     environment:
       - sonar.jdbc.url=jdbc:postgresql://database:5432/sonarqube
     volumes:
