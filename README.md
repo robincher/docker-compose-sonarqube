@@ -88,6 +88,12 @@ You can also edit the configuration at conf/sonar.properties as it is mount dire
 
 The example configurations in sonar.properties to connect with AD through ldaps and outgoing proxy for updates through HTTP authentication. Please add in the details based on your own set-up
 
+##
+
+## License
+
+[Robin Cher - MIT LICENSE ](https://github.com/robincher/docker-compose-sonarqube/blob/master/LICENSE)
+
 ## Useful Commands
 
 Some useful commands for testing the set-up
